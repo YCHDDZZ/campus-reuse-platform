@@ -1,0 +1,1 @@
+后端开发框架Spring Boot、权限控制技术Spring Security、ORM框架MyBatis-Plus，以及前端Vue3、ElementPlus等技术，熟悉MySQL数据库设计与优化、Redis缓存应用、MinIO文件存储等关键技术.
