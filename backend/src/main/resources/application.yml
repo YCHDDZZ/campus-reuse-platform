@@ -1,0 +1,32 @@
+﻿server:
+  port: 8080
+
+spring:
+  application:
+    name: campus-reuse-platform
+  profiles:
+    active: prod
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+  jackson:
+    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+app:
+  jwt:
+    secret: campus-reuse-platform-demo-secret-key-2026!
+    expire-hours: 24
+  minio:
+    endpoint: http://43.226.36.24:9000/
+    access-key: admin
+    secret-key: "admin123456"
+    bucket: ych
+

@@ -1,0 +1,94 @@
+﻿校园二手闲置循环平台 - 项目运行说明（最终版）
+
+项目目录：F:/Projects/campus-reuse-platform
+
+一、项目简介
+本项目为“基于 Spring Boot 的校园二手闲置循环平台设计与实现”毕业设计项目。
+
+二、技术实现情况
+1. 后端开发框架：Spring Boot
+2. 权限控制技术：Spring Security + JWT
+3. ORM 框架：MyBatis-Plus
+4. 前端技术：Vue3 + Element Plus + Pinia + Vue Router
+5. 数据库：MySQL
+6. 缓存：Redis（不可用时自动降级为本地缓存）
+7. 文件存储：MinIO
+
+三、环境要求
+1. JDK 11
+2. Maven 3.9+
+3. Node.js 20+
+4. npm 10+
+5. MySQL 8
+6. Redis 6/7（可选，建议启动）
+7. MinIO（必须使用 API 端口）
+
+四、当前关键配置说明
+1. Spring Profile 默认使用：prod
+2. MySQL：
+   - host: 127.0.0.1
+   - port: 3306
+   - database: campus_reuse
+   - username: root
+   - password: root
+3. Redis：
+   - host: 127.0.0.1
+   - port: 6379
+4. MinIO：
+   - endpoint 必须使用 API 端口 9000
+   - 当前项目已修正为 API 端口
+
+五、数据库脚本
+1. 全量建库建表：backend/sql/schema-mysql.sql
+2. 用户头像字段增量脚本：backend/sql/alter-platform-user-add-avatar-url.sql
+3. 索引优化脚本：backend/sql/optimize-indexes.sql
+
+六、启动方式
+1. 启动后端
+   目录：F:/Projects/campus-reuse-platform/backend
+   命令：mvn spring-boot:run
+   地址：http://127.0.0.1:8080
+
+2. 启动前端
+   目录：F:/Projects/campus-reuse-platform/frontend
+   首次安装：npm install
+   启动命令：npm run dev
+   地址：http://127.0.0.1:5173
+
+七、演示账号
+1. admin / Admin@123
+2. student / 123456
+3. seller / 123456
+
+八、MinIO 相关接口
+1. 上传文件
+   POST /api/files/upload
+2. 预览文件
+   GET /api/files/preview?objectName=xxx
+3. 删除文件
+   DELETE /api/files?objectName=xxx
+
+九、已接入 MinIO 的业务场景
+1. 商品图片上传
+2. 联系二维码上传
+3. 用户头像上传
+
+十、已实现功能
+1. 用户注册、登录、JWT 鉴权
+2. 用户资料维护、头像上传
+3. 商品发布、审核、搜索、收藏、留言、举报
+4. 订单、评价、纠纷处理、捐赠功能
+5. 管理员审核用户、商品、处理举报与统计看板
+
+十一、实际联调验证结果（2026-03-17）
+1. MySQL 已验证可连接，数据库与 9 张核心业务表存在。
+2. Redis 本机 6379 端口当前未启动。
+3. 项目已增加 Redis 不可用自动降级，不会阻塞核心功能。
+4. MinIO 已实际验证：上传成功、预览成功、删除成功。
+5. 后端已验证可启动。
+6. 前端已验证可构建通过。
+
+十二、注意事项
+1. 如果是已有 MySQL 库，请补执行头像字段和索引优化脚本。
+2. 如果希望真实使用 Redis 缓存效果，请先启动本机 Redis 服务。
+3. MinIO 必须填写 API 端口，不要填写控制台端口。
